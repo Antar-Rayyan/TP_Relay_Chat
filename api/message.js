@@ -1,5 +1,6 @@
 import { Redis } from '@upstash/redis';
 import { getConnecterUser, triggerNotConnected } from "../lib/session.js";
+import PushNotifications from '@pusher/push-notifications-server';
 
 const redis = Redis.fromEnv();
 
@@ -46,13 +47,14 @@ export default async function handler(request, response) {
                 secretKey: process.env.PUSHER_SECRET_KEY,
             });
 
-            const publishResponse = await beamsClient.publishToUsers([recipientId], {
+            console.log(recipientId);
+            const publishResponse = await beamsClient.publishToUsers([recipientId.toString()], {
                 web: {
                     notification: {
                         title: user.username,
                         body: message.content,
                         ico: "https://www.univ-brest.fr/themes/custom/ubo_parent/favicon.ico",
-                        deep_link: "" /* lien permettant d'ouvrir directement la conversation concernée */,
+                        deep_link: "http://localhost:3000",
                     },
                     data: {
                         /* additionnal data */
