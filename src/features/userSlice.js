@@ -6,7 +6,9 @@ const userSlice = createSlice({
     name: '',
     token: '',
     loggedIn: false,
-    error: ''
+    error: '',
+    userList: [], // Nouvelle propriété pour stocker la liste des utilisateurs
+    selectedUser: null // Utilisateur actuellement sélectionné
   },
   reducers: {
     loginSuccess: (state, action) => {
@@ -25,9 +27,14 @@ const userSlice = createSlice({
       state.loggedIn = false;
       state.error = '';
     },
+    setUserList: (state, action) => {
+      state.userList = action.payload;
+    },
+    selectUser: (state, action) => {
+      state.selectedUser = action.payload;
+    }
   },
 });
 
-export const { loginSuccess, loginFailure, logout } = userSlice.actions;
+export const { loginSuccess, loginFailure, logout, setUserList, selectUser } = userSlice.actions;
 export default userSlice.reducer;
-

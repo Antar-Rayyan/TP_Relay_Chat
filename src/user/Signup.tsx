@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { TextField, Button, Container, Box, Typography, Alert } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import NavBar from "../pages/NavBar";
 
 export function Signup() {
     const [error, setError] = useState<string>("");
@@ -48,50 +49,54 @@ export function Signup() {
     };
 
     return (
-        <Container maxWidth="xs">
-            <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: 5 }}>
-                <Typography variant="h5" gutterBottom>Inscription</Typography>
-                <form onSubmit={handleSubmit} style={{ width: "100%" }}>
-                    <TextField
-                        label="Nom d'utilisateur"
-                        name="login"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        label="Email"
-                        name="email"
-                        type="email"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                    />
-                    <TextField
-                        label="Mot de passe"
-                        name="password"
-                        type="password"
-                        variant="outlined"
-                        fullWidth
-                        margin="normal"
-                    />
-                    <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
-                        S&apos;inscrire
-                    </Button>
-                </form>
+        <>
+        <NavBar/>
 
-                {success && (
-                    <Box sx={{ mt: 3 }}>
-                        <Alert severity="success">{success}</Alert>
-                    </Box>
-                )}
+<Container maxWidth="xs">
+    <Box sx={{ display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center", marginTop: 5 }}>
+        <Typography variant="h5" gutterBottom>Inscription</Typography>
+        <form onSubmit={handleSubmit} style={{ width: "100%" }}>
+            <TextField
+                label="Nom d'utilisateur"
+                name="login"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+            />
+            <TextField
+                label="Email"
+                name="email"
+                type="email"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+            />
+            <TextField
+                label="Mot de passe"
+                name="password"
+                type="password"
+                variant="outlined"
+                fullWidth
+                margin="normal"
+            />
+            <Button type="submit" variant="contained" color="primary" fullWidth sx={{ mt: 2 }}>
+                S&apos;inscrire
+            </Button>
+        </form>
 
-                {error && (
-                    <Box sx={{ mt: 2 }}>
-                        <Alert severity="error">{error}</Alert>
-                    </Box>
-                )}
+        {success && (
+            <Box sx={{ mt: 3 }}>
+                <Alert severity="success">{success}</Alert>
             </Box>
-        </Container>
+        )}
+
+        {error && (
+            <Box sx={{ mt: 2 }}>
+                <Alert severity="error">{error}</Alert>
+            </Box>
+        )}
+    </Box>
+</Container>
+        </>
     );
 }

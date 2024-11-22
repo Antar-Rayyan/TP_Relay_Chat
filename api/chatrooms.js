@@ -1,5 +1,5 @@
 import { sql } from "@vercel/postgres";
-import {checkSession, unauthorizedResponse} from "../lib/session";
+import { checkSession, unauthorizedResponse } from "../lib/session";
 
 export const config = {
     runtime: 'edge',
@@ -13,8 +13,8 @@ export default async function handler(request) {
             return unauthorizedResponse();
         }
 
-        const {rowCount, rows} = await sql`select user_id, username, external_id, TO_CHAR(last_login, 'DD/MM/YYYY HH24:MI') as last_login from users order by last_login desc`;
-        console.log("Got " + rowCount + " users");
+        const {rowCount, rows} = await sql`select room_id, name, TO_CHAR(created_on, 'DD/MM/YYYY HH24:MI') as created_on from rooms`;
+        console.log("Got " + rowCount + " rooms");
         if (rowCount === 0) {
             /* Vercel bug doesn't allow 204 response status */
             return new Response("[]", {
@@ -31,7 +31,7 @@ export default async function handler(request) {
         console.log(error);
         return new Response(JSON.stringify(error), {
             status: 500,
-            headers: {'content-type': 'application/json'},
+            headers: { 'content-type': 'application/json' },
         });
     }
 };
