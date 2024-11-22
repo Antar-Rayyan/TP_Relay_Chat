@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { Box, TextField, Button, Typography, Paper, Grid } from '@mui/material';
-import * as PusherPushNotifications from "@pusher/push-notifications-web";
 
 function Chat({ recipientId, recipientType, currentUserId, userName }) {
     const [messages, setMessages] = useState([]);
@@ -46,30 +45,6 @@ function Chat({ recipientId, recipientType, currentUserId, userName }) {
             fetchMessages();
         }
     }, [recipientId, recipientType]);
-
-    useEffect(() => {
-        const beamsClient = new PusherPushNotifications.Client({
-            instanceId: "7e69ae50-bb55-4360-9819-4c8bfd05a7b2",
-          });
-
-        const token = sessionStorage.getItem('token');
-        const externalId = sessionStorage.getItem('externalId');
-        
-        const beamsTokenProvider = new PusherPushNotifications.TokenProvider({
-            url: "/api/beams",
-                headers: {
-                    'Authentication': `Bearer ${token}`,
-                },
-            });
-        
-        beamsClient.start()
-            .then(() => beamsClient.addDeviceInterest('global'))
-            .then(() => beamsClient.setUserId(externalId, beamsTokenProvider))
-            .then(() => {
-                beamsClient.getDeviceId().then(deviceId => console.log("Push id : " + deviceId));
-            })
-            .catch(console.error);
-      }, []);
 
     const sendMessage = async () => {
         try {

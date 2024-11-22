@@ -6,6 +6,12 @@ import { Signup } from './user/Signup.tsx';
 import Messaging from './user/Messaging.js';
 
 function App() {
+  const sw = navigator.serviceWorker;
+if (sw != null) {
+    sw.onmessage = (event) => {
+        console.log("Got event from sw : " + event.data);
+    }
+}
   return (
     <Routes>
       <Route path="/" element={<Home />} />
