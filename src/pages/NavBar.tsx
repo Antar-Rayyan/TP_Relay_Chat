@@ -15,7 +15,7 @@ const NavBar: React.FC<NavBarProps> = ({ handleLogout }) => {
         <AppBar position="static">
             <Toolbar>
                 <Typography variant="h6" sx={{ flexGrow: 1 }}>
-                    Mon Application
+                    UBO Chat
                 </Typography>
                 {handleLogout ? (
                     <Button color="inherit" onClick={handleLogout}>

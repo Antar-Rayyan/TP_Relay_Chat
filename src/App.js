@@ -1,6 +1,5 @@
 import './App.css';
-import {Route, Routes} from 'react-router-dom';
-import Home from './pages/Home.js';
+import {Route, Routes, Navigate} from 'react-router-dom';
 import {Login} from "./user/Login.tsx";
 import { Signup } from './user/Signup.tsx';
 import Messaging from './user/Messaging.js';
@@ -14,7 +13,7 @@ if (sw != null) {
 }
   return (
     <Routes>
-      <Route path="/" element={<Home />} />
+      <Route path="/" element={<Navigate to="/login" replace />} />
       <Route path="/login" element={<Login />} />
       <Route path='/signup' element={<Signup />} />
       <Route path='/messaging' element={<Messaging />} />

@@ -56,6 +56,8 @@ export function Login() {
     );
   };
 
+  console.log(process.env.PUSHER_INSTANCE_ID);
+
   const handleLogout = () => {
     setSession({} as Session);
     sessionStorage.clear();
@@ -65,7 +67,6 @@ export function Login() {
     <>
       <NavBar />
 
-      {/* Formulaire de connexion */}
       <Container maxWidth="xs">
         <Box
           sx={{
